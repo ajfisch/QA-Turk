@@ -1,4 +1,4 @@
-# QA-Turk: Annotation tool for Extractive Question Answering with localturk / Amazon Mechanical Turk
+# QA-Turk: Annotation tool for Extractive Question Answering
 
 Adapted from [Vicor Quach](https://github.com/Varal7)'s great [ieturk](https://github.com/Varal7/ieturk) repo.
 
