@@ -1,5 +1,15 @@
-# IE-Turk: Annotation tool for Information Extraction with localturk / Amazon Mechanical Turk
+# QA-Turk: Annotation tool for Extractive Question Answering with localturk / Amazon Mechanical Turk
 
+Adapted from [Vicor Quach](https://github.com/Varal7)) great [ieturk](https://github.com/Varal7/ieturk) repo.
+
+## Input Files
+
+Requires a CSV input file with `description`,`question`,`spans` input. Spans are `start,end` token tuples that will be prefilled in the interface.
+
+Notes:
+- Multiple spans are specified as `start_1,end_1,start_2,end_2,...`.
+- No spans are specified as "".
+- Use a standard CSV reader/writer to make sure everything is escaped properly.
 ## Annotate
 
 ### Annotate using Mechanical Turk
@@ -25,14 +35,7 @@ Then simply run it using the same tokenized csv file as for Mechanical Turk.
 localturk annotation.html input.csv output.csv
 ```
 
-![Screenshot](https://raw.githubusercontent.com/Varal7/ieturk/master/images/tagging.gif)
-
 ## Visualize
 
 Simply open `visualize.html` with any modern browser.
 Then choose the `.csv` that came from either localturk or Mechanical Turk.
-
-![Screenshot](https://raw.githubusercontent.com/Varal7/ieturk/master/images/viz.png)
-
-This file is also served at [Visualization Demo](http://people.csail.mit.edu/quach/ieturk-demo/).
-You can try uploading this [CSV file](https://raw.githubusercontent.com/Varal7/ieturk/master/example/output.csv).

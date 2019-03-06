@@ -187,7 +187,7 @@ var get_value = function() {
     var values = _.map(annotations[key], function(annotation) {
         return tokens.slice(annotation[0], annotation[1]).join(" ");
     });
-    return values.join(" ");
+    return values.join(" | ");
 };
 
 var remove_all_annotations = function() {
@@ -341,9 +341,11 @@ var spansStrToAns =  function(spansStrToAns) {
 
 key = keys[0];
 radios[key].click();
-var tokens = raw.text().split(">>");
+var tokens = raw.text().split(" ");
 raw.hide();
 spans.hide();
-annotations['answer'] = spansStrToAns(spans.text());
+if(spans.text().length > 0){
+    annotations['answer'] = spansStrToAns(spans.text());
+}
 console.log(annotations);
 show();

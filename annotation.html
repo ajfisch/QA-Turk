@@ -1,26 +1,6 @@
 <meta content="width=device-width,initial-scale=1" name="viewport" />
 <section class="container" id="Relevancy">
-    <div class="row">
-        <div class="col-xs-12 col-md-12">
-            <div class="panel panel-primary"><a class="panel-heading" href="javascript:void(0);" id="collapseTrigger"><strong>Tagging Instructions</strong> <span class="collapse-text">(Click to expand)</span> </a>
-                <div class="panel-body" id="instructionBody"><strong>Tag the description to extract the following fields of interest</strong>
-                    <table class="table table-condensed table-striped table-responsive">
-                        <colgroup>
-                            <col class="col-xs-2 col-md-2" />
-                            <col class="col-xs-10 col-md-10" />
-                        </colgroup>
-                        <tbody id="instruction-table">
-                        </tbody>
-                    </table>
-                    <div class="text-center">
-                        <img src="images/tagging.gif" alt="tagging" width="50%"/>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <h2>Highlight the <strong id="key-name" class="key-name">name</strong> in the description</h2>
+    <h2>Highlight the <strong id="key-name" class="key-name">name</strong> in the text</h2>
     <div id="raw">${description}</div>
     <div id="spans">${spans}</div>
 
@@ -63,6 +43,4 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/2.4.1/lodash.min.js"></script>
 <link href="style.css" rel="stylesheet" />
 <script src="config.js"></script>
-<!--Uncomment the next line for a NER task-->
-<!--<script src="example/config.js"></script>--> 
 <script src="annotation.js"></script>
