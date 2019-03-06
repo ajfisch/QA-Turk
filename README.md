@@ -17,7 +17,7 @@ Notes:
 - Create an new project in [Amazon Mturk interface](https://requester.mturk.com/create/projects/new).
 - Paste the content of `annotate.html` in the second tab `Design layout`.
 - Insert the scripts `config.js`, `annotate.js` and the CSS file `style.css` into the document as well
-- Prepare a tokenized version of the entry, splitting characters with `>>`.
+- Prepare a tokenized version of the entry, separating tokens with spaces.
 - Submit batch
 
 ### Annotate locally
