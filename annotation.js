@@ -23,6 +23,7 @@ var form = $("#form");
 var answer = {};
 var tagHidden = {};
 var noVal = {};
+var skip = {}
 var radios = {};
 // answerHiddenDuplicates value of answer but is needed because
 // otherwise the data is not sent
@@ -77,17 +78,32 @@ var makeTagHidden = function(key) {
 
 
 var  makeFormRow = function(key) {
-    var checkbox = ($(
+    var noValCheckbox = ($(
         '<input>')
         .attr({'type': 'checkbox', 'id': "no-" + key})
         .addClass('form-check-input')
         .change(function() { show(); })
     );
-    var label = ($(
+
+    var skipCheckbox = ($(
+        '<input>')
+        .attr({'type': 'checkbox', 'id': "skip-" + key})
+        .addClass('form-check-input')
+        .change(function() { show(); })
+    );
+
+    var noValLabel = ($(
         '<label>')
         .attr({'for': "no-" + key})
         .addClass('form-check-label')
         .text(' There is no ' + shortName[key])
+    );
+
+    var skipLabel = ($(
+        '<label>')
+        .attr({'for': "skip-" + key})
+        .addClass('form-check-label')
+        .text('Skip this question')
     );
 
     var input = ($(
@@ -103,25 +119,32 @@ var  makeFormRow = function(key) {
             .attr({'for': key})
             .text(fieldName[key])
         )
-        .append($('<div>')
+	.append($('<div>')
             .addClass('form-row')
             .append($('<div>')
                 .addClass('col-sm-8')
                 .append(input)
             )
-            .append($('<div>')
-                .addClass('col-sm-4')
+	    .append($('<div>')
+	        .addClass('col-sm-4')
                 .append($('<div>')
                     .addClass('form-check')
-                    .append(checkbox)
+                    .append(noValCheckbox)
                     .append(' ')
-                    .append(label)
+                    .append(noValLabel)
                 )
+                .append($('<div>')
+                    .addClass('form-check')
+                    .append(skipCheckbox)
+	            .append(' ')
+		    .append(skipLabel)
+	        )
             )
         )
     );
     answer[key] = input;
-    noVal[key] = checkbox;
+    noVal[key] = noValCheckbox;
+    skip[key] = skipCheckbox;
     return div;
 }
 
@@ -184,10 +207,14 @@ var clear_selection = function() {
 };
 
 var get_value = function() {
-    var values = _.map(annotations[key], function(annotation) {
-        return tokens.slice(annotation[0], annotation[1]).join(" ");
-    });
-    return values.join(" | ");
+    if (noVal[key].is(":checked")){
+	return "NONE";
+    }else{
+	var values = _.map(annotations[key], function(annotation) {
+            return tokens.slice(annotation[0], annotation[1]).join(" ");
+	});
+	return values.join(" | ");
+    }
 };
 
 var remove_all_annotations = function() {
@@ -237,7 +264,7 @@ var sequence_html = function(sequence, annotations) {
 
 var canSubmit = function() {
     for (var key of keys) {
-        if (values[key] == "" && !noVal[key].is(":checked")) { return false; }
+        if (values[key] == "" && !noVal[key].is(":checked") && !skip[key].is(":checked")) { return false; }
     }
     return true;
 }
@@ -311,20 +338,6 @@ inputs.change(function(){
     }
 });
 
-// Instructions expand/collapse
-var content = $('#instructionBody');
-var trigger = $('#collapseTrigger');
-content.hide();
-$('.collapse-text').text('(Click to expand)');
-trigger.click(function(){
-    content.toggle();
-    var isVisible = content.is(':visible');
-    if(isVisible){
-        $('.collapse-text').text('(Click to collapse)');
-    }else{
-        $('.collapse-text').text('(Click to expand)');
-    }
-});
 
 // ---------------------------------------------------------
 // Initialize
