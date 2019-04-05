@@ -1,48 +1,49 @@
 <meta content="width=device-width,initial-scale=1" name="viewport" />
 <section class="container" id="Relevancy">
-    <div class="row">
-        <div class="col-xs-12 col-md-12">
-          <div class="panel panel-primary"><a class="panel-heading" href="javascript:void(0);" id="collapseTrigger"><strong>Instructions</strong> <span class="collapse-text">(Click to expand)</span> </a>
-	    <div class="panel-body" id="instructionBody">
-	      <ul>
-		<li>Spans that "match" the answer are highlighted. Some are mistakes. Keep only those that are correct!</li>
-		<li>A span is <strong>correct</strong> if it is supported by its surrounding context. If you were answering the question, would you have picked this span?</li>
-		<li>Example:  The span "2" in "The baby is 2 years old" does <strong>not</strong> logically match "What is 1 + 1?"</li>
-		<li>Click to unselect. Or click and drag to select a new span.</li>
-		<li>If nothing in the passage answers the question, select <strong>Question has no answer</strong>.</li>
-	      </ul>
-	    </div>
-        </div>
+  <div class="row">
+    <div class="col-xs-12 col-md-12">
+      <div class="panel panel-primary"><a class="panel-heading" href="javascript:void(0);" id="collapseTrigger"><strong>Instructions</strong> <span class="collapse-text">(Click to expand)</span> </a>
+	<div class="panel-body" id="instructionBody">
+	  <ul>
+	    <li>Spans that "match" the answer are highlighted. Some are mistakes. Keep only those that are correct!</li>
+	    <li>A span is <strong>correct</strong> if it is supported by its surrounding context. If you were answering the question, would you have picked this span?</li>
+	    <li>Example:  The span "2" in "The baby is 2 years old" does <strong>not</strong> logically match "What is 1 + 1?"</li>
+	    <li>Click to unselect. Or click and drag to select a new span.</li>
+	    <li>If nothing in the passage answers the question, select <strong>Question has no answer</strong>.</li>
+	  </ul>
+	</div>
+      </div>
     </div>
     <h2>Highlight the <strong id="key-name" class="key-name">name</strong> in the text</h2>
     <div class="row">
-        <div class="col-xs-12 col-sm-8 content">
-            <div class="form-group">
-                <label for="question-sub">Question</label>
-                <input type="text" name="question-sub" id="question-sub" class="form-control" value="${question}">
-            </div>
+      <div class="col-xs-12 col-sm-8 content">
+        <div class="form-group">
+          <label for="question-sub">Question</label>
+          <input type="text" name="question-sub" id="question-sub" class="form-control" value="${question}">
         </div>
+      </div>
     </div>
     <div id="form" class="row"> </div>
     <div id="raw">${description}</div>
     <div id="spans">${spans}</div>
+    <div id="overlaps">${overlaps}</div>
     <div class="row" id="workContent">
-        <div class="col-xs-12 col-sm-8 content">
-            <div id="well" class="ann well" style="overflow-y:scroll; height:300px;"></div>
+      <div class="col-xs-12 col-sm-8 content">
+        <div id="well" class="ann well" style="overflow-y:scroll; height:300px;"></div>
+      </div>
+      <div class="col-xs-12 col-sm-4 fields">
+        <div id="button-div">
+          <button type="button" id="undo" value="undo" class="btn btn-primary">
+            <span class="glyphicon glyphicon-backward"></span> Undo
+          </button>
+          <button type="button" id="remove" value="remove" class="btn btn-danger">
+            <span class="glyphicon glyphicon-remove"></span> Reset
+          </button>
         </div>
-        <div class="col-xs-12 col-sm-4 fields">
-            <div id="button-div">
-                <button type="button" id="undo" value="undo" class="btn btn-primary">
-                    <span class="glyphicon glyphicon-backward"></span> Undo
-                </button>
-                <button type="button" id="remove" value="remove" class="btn btn-danger">
-                    <span class="glyphicon glyphicon-remove"></span> Reset
-                </button>
-            </div>
 
-            <div class="btn-group-vertical" data-toggle="buttons" id="choice">
-            </div>
+        <div class="btn-group-vertical" data-toggle="buttons" id="choice">
         </div>
+      </div>
     </div>
     <span title="Highlight all fields before submitting"><input id="submit" class="btn btn-default" data-key="Enter" type="submit" disabled=disabled /></span>
 </section>

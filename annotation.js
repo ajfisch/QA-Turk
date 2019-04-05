@@ -13,6 +13,7 @@ var key;
 
 var raw = $('#raw');
 var spans = $('#spans');
+var qspans = $('#overlaps');
 var well = $('#well');
 var submit = $('#submit');
 var choice = $('#choice');
@@ -20,6 +21,7 @@ var keyname = $('#key-name');
 var instructionTable = $('#instruction-table');
 
 var form = $("#form");
+var qOverlap = [];
 var answer = {};
 var tagHidden = {};
 var skip = {}
@@ -191,6 +193,7 @@ var get_value = function() {
 	var values = _.map(annotations[key], function(annotation) {
             return tokens.slice(annotation[0], annotation[1]).join(" ");
 	});
+	values = Array.from(new Set(values));
 	return values.join(" | ");
     }
 };
@@ -224,11 +227,17 @@ var toggle_old_new = function() {
 // Displaying
 // ---------------------------------------------------------
 
-var sequence_html = function(sequence, annotations) {
+var sequence_html = function(sequence, annotations, overlaps) {
     var ret = _.map(sequence, function(token, index) {
         return '<span class="token" id=tok_' + index + '> '
             + token + ' </span>';
     });
+    console.log(overlaps);
+    _.each(overlaps, function(overlap) {
+        ret[overlap[0]] = '<strong class="overlap">'
+            + ret[overlap[0]];
+        ret[overlap[1]-1] = ret[overlap[1]-1] + '</strong>';
+    });    
     _.each(annotations, function(annotation) {
         ret[annotation[0]] = '<strong class="annotation">'
             + ret[annotation[0]];
@@ -237,7 +246,6 @@ var sequence_html = function(sequence, annotations) {
 
     return ret.join(' ');
 }
-
 
 
 var canSubmit = function() {
@@ -252,14 +260,12 @@ var show = function() {
         return a[0] - b[0];
     });
     //fill_annotated_values(datum);
-    seq_html = sequence_html(tokens, annotations[key]);
+    seq_html = sequence_html(tokens, annotations[key], qOverlap);
     well.html(seq_html);
     values[key] = get_value();
     answer[key].val(values[key]);
     answerHidden[key].val(values[key]);
     tagHidden[key].val(annotations[key]);
-    console.log(key);
-    console.log(annotations[key]);
     keyname.html(shortName[key]);
 
 
@@ -347,11 +353,14 @@ var spansStrToAns =  function(spansStrToAns) {
 
 key = keys[0];
 radios[key].click();
-var tokens = raw.text().split(" ");
+var tokens = raw.text().split(' ');
 raw.hide();
 spans.hide();
+qspans.hide();
 if(spans.text().length > 0){
     annotations['answer'] = spansStrToAns(spans.text());
 }
+qOverlap = spansStrToAns(qspans.text());
+console.log(qOverlap);
 console.log(annotations);
 show();
