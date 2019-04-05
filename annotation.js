@@ -22,7 +22,6 @@ var instructionTable = $('#instruction-table');
 var form = $("#form");
 var answer = {};
 var tagHidden = {};
-var noVal = {};
 var skip = {}
 var radios = {};
 // answerHiddenDuplicates value of answer but is needed because
@@ -78,25 +77,11 @@ var makeTagHidden = function(key) {
 
 
 var  makeFormRow = function(key) {
-    var noValCheckbox = ($(
-        '<input>')
-        .attr({'type': 'checkbox', 'id': "no-" + key})
-        .addClass('form-check-input')
-        .change(function() { show(); })
-    );
-
     var skipCheckbox = ($(
         '<input>')
         .attr({'type': 'checkbox', 'id': "skip-" + key})
         .addClass('form-check-input')
         .change(function() { show(); })
-    );
-
-    var noValLabel = ($(
-        '<label>')
-        .attr({'for': "no-" + key})
-        .addClass('form-check-label')
-        .text(' There is no ' + shortName[key])
     );
 
     var skipLabel = ($(
@@ -129,12 +114,6 @@ var  makeFormRow = function(key) {
 	        .addClass('col-sm-4')
                 .append($('<div>')
                     .addClass('form-check')
-                    .append(noValCheckbox)
-                    .append(' ')
-                    .append(noValLabel)
-                )
-                .append($('<div>')
-                    .addClass('form-check')
                     .append(skipCheckbox)
 	            .append(' ')
 		    .append(skipLabel)
@@ -143,7 +122,6 @@ var  makeFormRow = function(key) {
         )
     );
     answer[key] = input;
-    noVal[key] = noValCheckbox;
     skip[key] = skipCheckbox;
     return div;
 }
@@ -207,7 +185,7 @@ var clear_selection = function() {
 };
 
 var get_value = function() {
-    if (noVal[key].is(":checked")){
+    if (skip[key].is(":checked")){
 	return "NONE";
     }else{
 	var values = _.map(annotations[key], function(annotation) {
@@ -264,7 +242,7 @@ var sequence_html = function(sequence, annotations) {
 
 var canSubmit = function() {
     for (var key of keys) {
-        if (values[key] == "" && !noVal[key].is(":checked") && !skip[key].is(":checked")) { return false; }
+        if (values[key] == "" && !skip[key].is(":checked")) { return false; }
     }
     return true;
 }
@@ -335,6 +313,21 @@ inputs.change(function(){
     }else{
         $(this).parent().removeClass("btn-success");
         $(this).parent().addClass("btn-default");
+    }
+});
+
+// Instructions expand/collapse
+var content = $('#instructionBody');
+var trigger = $('#collapseTrigger');
+content.hide();
+$('.collapse-text').text('(Click to expand)');
+trigger.click(function(){
+    content.toggle();
+    var isVisible = content.is(':visible');
+    if(isVisible){
+        $('.collapse-text').text('(Click to collapse)');
+    }else{
+        $('.collapse-text').text('(Click to expand)');
     }
 });
 
