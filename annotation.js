@@ -229,6 +229,12 @@ var toggle_old_new = function() {
 
 var sequence_html = function(sequence, annotations, overlaps) {
     var ret = _.map(sequence, function(token, index) {
+	if (token == '[PAR]' || token == '[DOC]'){
+	    token = '<br><br>'
+	};
+	if (token == '[TLE]'){
+	    token = ' '
+	};
         return '<span class="token" id=tok_' + index + '> '
             + token + ' </span>';
     });
