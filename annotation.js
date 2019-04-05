@@ -88,7 +88,7 @@ var  makeFormRow = function(key) {
         '<label>')
         .attr({'for': "skip-" + key})
         .addClass('form-check-label')
-        .text('Skip this question')
+        .text('Question has no answer')
     );
 
     var input = ($(
