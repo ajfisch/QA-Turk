@@ -5,12 +5,16 @@
       <div class="panel panel-primary"><a class="panel-heading" href="javascript:void(0);" id="collapseTrigger"><strong>Instructions</strong> <span class="collapse-text">(Click to expand)</span> </a>
 	<div class="panel-body" id="instructionBody">
 	  <ul>
-	    <li>Spans that "match" the answer are <strong class="annotation">highlighted</strong>. Some are mistakes. Keep only those that are correct!</li>
-	    <li>A span is <strong>correct</strong> if it is supported by its surrounding context. If you were answering the question, would you have picked this span?</li>
-	    <li>Example:  The span "2" in "The baby is 2 years old" does <strong>not</strong> logically match "What is 1 + 1?"</li>
-	    <li>Click to unselect. Or click and drag to select a new span that is better.</li>
-	    <li>To help you judge if the context is relevant to the question, question words are <strong class="overlap">highlighted</strong>.</li>
-	    <li>If nothing in the passage answers the question, select <strong>Question has no answer</strong>.</li>
+	    <li>In this task, please validate answer spans to the question from the provided text!</li>
+	    <li>Answer spans are already <strong class="annotation">highlighted</strong> in the text, but some are mistakes. Discard incorrect ones, and add missing correct ones. If nothing in the text answers the question, select “Question has no answer”.</li>
+	    <li>You can click to unselect existing spans, and click and drag to select a new span.</li>
+	    <li>Answer spans are <strong>valid only</strong> when their surrounding context supports them for the provided questions. Can you answer the question given only the provided text?</li>
+	    <li>Example: Given the question “What is the capital of Laos?”, the span “Vientiane” in text (1) should not be selected and should be selected in text (2).</li>
+	    <ol>
+	      <li style="margin-left:1em">Laos used to have three separate kingdoms — Luang Phabang, Vientiane and Champasak.</li>
+	      <li style="margin-left:1em">Laos is a one-party socialist republic. The capital city is <strong class="annotation">Vientiane</strong>.</li>
+	    </ol>
+	    <li>To help you find answers easily, words appearing in the question are <strong class="overlap">highlighted</strong> in the text.</li>
 	  </ul>
 	</div>
       </div>
