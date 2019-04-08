@@ -8,12 +8,23 @@
 	    <li>In this task, please validate answer spans to the question from the provided text!</li>
 	    <li>Answer spans are already <strong class="annotation">highlighted</strong> in the text, but some are mistakes. Discard incorrect ones, and add missing correct ones. If nothing in the text answers the question, select “Question has no answer”.</li>
 	    <li>You can click to unselect existing spans, and click and drag to select a new span.</li>
+	    <li>Make sure to remember to click <em>and drag</em> to select a continuous span.</li>
+	    <li>Example: "When did Marilyn Monroe die?"</li>
+	    <ul>
+	      <li style="margin-left:1em"><strong><font color="#8b0000">Incorrect:</font></strong> Marilyn Monroe died on <strong class="annotation">August </strong><strong class="annotation">5 </strong><strong class="annotation">, </strong><strong class="annotation">1962 </strong>.</li>
+	      <li style="margin-left:1em"><strong><font color="#2E8B57">Correct:</font></strong> Marilyn Monroe died on <strong class="annotation">August 5, 1962</strong>.</li>
+	    </ul>	    
 	    <li>Answer spans are <strong>valid only</strong> when their surrounding context supports them for the provided questions. Can you answer the question given only the provided text?</li>
 	    <li>Example: Given the question “What is the capital of Laos?”, the span “Vientiane” in text (1) should not be selected and should be selected in text (2).</li>
 	    <ol>
 	      <li style="margin-left:1em">Laos used to have three separate kingdoms — Luang Phabang, Vientiane and Champasak.</li>
 	      <li style="margin-left:1em">Laos is a one-party socialist republic. The capital city is <strong class="annotation">Vientiane</strong>.</li>
 	    </ol>
+	    <li>Questions may have multiple correct answers. Multiple answers will be displayed in the <strong>Answer</strong> field as "answer 1 | answer 2 | ...".</li>
+	    <li>Example: "What are pennies made out of?"</li>
+	    <ul>
+	      <li style="margin-left:1em">Some pennies are made out of <strong class="annotation">copper</strong>. Others are made out of <strong class="annotation">bronze</strong> or <strong class="annotation">copper-plated zinc</strong>.</li>
+	    </ul>
 	    <li>To help you find answers easily, words appearing in the question are <strong class="overlap">highlighted</strong> in the text.</li>
 	  </ul>
 	</div>
@@ -42,7 +53,7 @@
             <span class="glyphicon glyphicon-backward"></span> Undo
           </button>
           <button type="button" id="remove" value="remove" class="btn btn-danger">
-            <span class="glyphicon glyphicon-remove"></span> Reset
+            <span class="glyphicon glyphicon-remove"></span> Clear
           </button>
         </div>
 
