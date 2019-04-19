@@ -1,4 +1,4 @@
-#collapseTrigger{
+#collapseTrigger{A
     color:#fff;
     display: block;
     text-decoration: none;
@@ -76,4 +76,26 @@ input[disabled] {
 
 #key-name {
     background-color: #EAD379;
+}
+
+/* Green */
+.success {
+    border-color: #4CAF50;
+    color: green;
+}
+
+.success:hover {
+    background-color: #4CAF50;
+    color: white;
+}
+
+/* Red */
+.danger {
+    border-color: #f44336;
+    color: red
+}
+
+.danger:hover {
+    background-color: #f44336;
+    color: white;
 }

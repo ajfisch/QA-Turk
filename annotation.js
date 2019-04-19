@@ -26,6 +26,8 @@ var answer = {};
 var tagHidden = {};
 var skip = {}
 var radios = {};
+var isvalid = null;
+
 // answerHiddenDuplicates value of answer but is needed because
 // otherwise the data is not sent
 var answerHidden = {};
@@ -78,7 +80,7 @@ var makeTagHidden = function(key) {
 }
 
 
-var  makeFormRow = function(key) {
+var makeFormRow = function(key) {
     var skipCheckbox = ($(
         '<input>')
         .attr({'type': 'checkbox', 'id': "skip-" + key})
@@ -111,15 +113,6 @@ var  makeFormRow = function(key) {
             .append($('<div>')
                 .addClass('col-sm-8')
                 .append(input)
-            )
-	    .append($('<div>')
-	        .addClass('col-sm-4')
-                .append($('<div>')
-                    .addClass('form-check')
-                    .append(skipCheckbox)
-	            .append(' ')
-		    .append(skipLabel)
-	        )
             )
         )
     );
@@ -187,7 +180,7 @@ var clear_selection = function() {
 };
 
 var get_value = function() {
-    if (skip[key].is(":checked")){
+    if (isvalid == false){
 	return "NONE";
     }else{
 	var values = _.map(annotations[key], function(annotation) {
@@ -255,10 +248,10 @@ var sequence_html = function(sequence, annotations, overlaps) {
 
 
 var canSubmit = function() {
-    for (var key of keys) {
-        if (values[key] == "" && !skip[key].is(":checked")) { return false; }
+    if (isvalid != null){
+	return true;
     }
-    return true;
+    return false;
 }
 
 var show = function() {
@@ -276,13 +269,6 @@ var show = function() {
 
 
     // Handler on tokens
-    $(".token").mousedown(function() {
-        mouse_down(parseInt($(this).attr('id').split("_")[1]));
-    });
-    $(".token").mouseup(function() {
-        mouse_up(parseInt($(this).attr('id').split("_")[1]));
-    });
-
     if (canSubmit()) {
         submit.removeAttr("disabled");
         submit.removeClass("btn-default");
@@ -301,14 +287,18 @@ makeDom();
 // Event handlers
 // ---------------------------------------------------------
 
-$("#undo").click(function() {
-    toggle_old_new();
+$("#valid").click(function() {
+    isvalid=true;
+    $("#valid").css({'background-color': "#4CAF50", 'color': 'white'});
+    $("#invalid").css({'background-color': "white", 'color': 'red'});
     show();
 });
 
 
-$("#remove").click(function() {
-    remove_all_annotations();
+$("#invalid").click(function() {
+    isvalid=false;
+    $("#invalid").css({'background-color': "#f44336", 'color': "white"});
+    $("#valid").css({'background-color': "white", 'color': "green"});
     show();
 });
 
