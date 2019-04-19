@@ -78,7 +78,7 @@ var makeTagHidden = function(key) {
 }
 
 
-var  makeFormRow = function(key) {
+var makeFormRow = function(key) {
     var skipCheckbox = ($(
         '<input>')
         .attr({'type': 'checkbox', 'id': "skip-" + key})
@@ -156,25 +156,18 @@ var get_annotation_id = function(token_id, annotations) {
 };
 
 var mouse_down = function(id) {
-    var annotation_id = get_annotation_id(id, annotations[key]);
-    if (annotation_id > -1) {
-        delete_annotation(annotation_id);
-        show();
-    } else {
-        first_token = id;
-    }
+    remove_all_annotations();
+    first_token = id;
 };
 
 var mouse_up = function(id) {
-    if (first_token > -1) {
-        if (first_token <= id) {
-            add_annotation([first_token, id + 1]);
-        } else {
-            add_annotation([id, first_token + 1]);
-        }
-        first_token = -1;
-        show();
+    if (first_token <= id) {
+        add_annotation([first_token, id + 1]);
+    } else {
+        add_annotation([id, first_token + 1]);
     }
+    first_token = -1;
+    show();
     clear_selection();
 };
 
@@ -301,17 +294,6 @@ makeDom();
 // Event handlers
 // ---------------------------------------------------------
 
-$("#undo").click(function() {
-    toggle_old_new();
-    show();
-});
-
-
-$("#remove").click(function() {
-    remove_all_annotations();
-    show();
-});
-
 //highlight selected category
 var inputs = $("#choice input:radio");
 inputs.change(function(){
@@ -363,9 +345,6 @@ var tokens = raw.text().split(' ');
 raw.hide();
 spans.hide();
 qspans.hide();
-if(spans.text().length > 0){
-    annotations['answer'] = spansStrToAns(spans.text());
-}
 qOverlap = spansStrToAns(qspans.text());
 console.log(qOverlap);
 console.log(annotations);
