@@ -38,18 +38,6 @@
     font-size: 15px;
 }
 
-.ann > span.token {
-    cursor: pointer;
-}
-
-.ann > span.token:hover {
-    text-decoration: underline;
-}
-
-.ann > strong.annotation:hover {
-    text-decoration: line-through;
-}
-
 .annotation {
     font-weight: normal;
     background-color: #EAD379;
