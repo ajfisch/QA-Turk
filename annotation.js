@@ -181,6 +181,7 @@ var clear_selection = function() {
 
 var get_value = function() {
     if (skip[key].is(":checked")){
+	remove_all_annotations();
 	return "NONE";
     }else{
 	var values = _.map(annotations[key], function(annotation) {
@@ -193,7 +194,7 @@ var get_value = function() {
 
 var remove_all_annotations = function() {
     old_annotations = annotations[key].slice();
-    annotations[key] = []
+    annotations[key] = [];
 };
 
 var delete_annotation = function(annotation_id) {
@@ -259,14 +260,13 @@ var show = function() {
         return a[0] - b[0];
     });
     //fill_annotated_values(datum);
-    seq_html = sequence_html(tokens, annotations[key], qOverlap);
-    well.html(seq_html);
     values[key] = get_value();
     answer[key].val(values[key]);
     answerHidden[key].val(values[key]);
     tagHidden[key].val(annotations[key]);
     keyname.html(shortName[key]);
-
+    seq_html = sequence_html(tokens, annotations[key], qOverlap);
+    well.html(seq_html);
 
     // Handler on tokens
     $(".token").mousedown(function() {
